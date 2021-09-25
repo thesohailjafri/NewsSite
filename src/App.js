@@ -1,25 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react'
+import { Container, Segment } from 'semantic-ui-react'
+import { Route, Switch, Redirect } from 'react-router'
+import Menu from './components/Menu'
+import Home from './pages/Home'
+import Trending from './pages/Trending'
+import Recommendation from './pages/Recommendation'
+import Weather from './pages/Weather'
 function App() {
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+
+      <Switch>
+        <Container>
+          <Menu />
+
+          <Segment>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+
+            <Route path='/trending'>
+              <Trending />
+            </Route>
+
+            <Route path='/recommendation'>
+              <Recommendation />
+            </Route>
+
+            <Route path='/weather'>
+              <Weather />
+            </Route>
+
+
+          </Segment>
+
+
+
+
+        </Container>
+      </Switch>
+
+
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
