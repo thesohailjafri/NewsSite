@@ -28,7 +28,7 @@ const checkSingleSearchWord = async (payload) => {
             headers: {
                 'content-type': 'application/x-www-form-urlencoded',
                 'x-rapidapi-host': 'bing-spell-check2.p.rapidapi.com',
-                'x-rapidapi-key': 'f292d453a7mshaa73272618be01ep134a00jsnd0e7e64aec36'
+                'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY
             },
             data: { Text: payload }
         }
