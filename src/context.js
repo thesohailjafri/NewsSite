@@ -57,11 +57,10 @@ export const ContextProvider = ({ children }) => {
 
     const getTrendingNews = useCallback(async () => {
         const res = await fetchTrendingNews()
-        const value = await res.value
-        if (value) {
+        if (res) {
             dispatch({
                 type: 'SET_TRENDING_NEWS',
-                trendingNews: value
+                trendingNews: res.value
             })
         }
     }, [])
