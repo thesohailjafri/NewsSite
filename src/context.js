@@ -10,6 +10,7 @@ export const ContextProvider = ({ children }) => {
         longitude: 72.8777,
         user: null,
         country: 'in',
+        currentWeather: null
     }
 
     const [state, dispatch] = useReducer(reducer, initialState)
