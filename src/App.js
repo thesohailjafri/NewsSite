@@ -14,33 +14,24 @@ function App() {
 
 
       <Switch>
-        <Container>
-          <Menu />
+        <Menu />
 
-          <Segment>
-            <Route exact path='/'>
-              <Home />
-            </Route>
+        <Route exact path='/'>
+          <Home />
+        </Route>
 
-            <Route path='/trending'>
-              <Trending />
-            </Route>
+        <Route path='/trending'>
+          <Trending />
+        </Route>
 
-            <Route path='/recommendation'>
-              <Recommendation />
-            </Route>
+        <Route path='/recommendation'>
+          <Recommendation />
+        </Route>
 
-            <Route path='/weather'>
-              <Weather />
-            </Route>
+        <Route path='/weather'>
+          <Weather />
+        </Route>
 
-
-          </Segment>
-
-
-
-
-        </Container>
       </Switch>
 
 

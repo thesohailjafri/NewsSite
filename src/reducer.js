@@ -17,6 +17,11 @@ export default function reducer(state, action) {
                 ...state,
                 trendingNews: action.trendingNews
             }
+        case 'SET_COVID_STATS':
+            return {
+                ...state,
+                covidStats: action.covidStats
+            }
         default:
             break
     }

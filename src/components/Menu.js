@@ -4,75 +4,97 @@ import { Popover, Transition } from '@headlessui/react'
 import {
     BookmarkAltIcon,
     CalendarIcon,
-    ChartBarIcon,
-    CursorClickIcon,
+    TrendingUpIcon,
+    StarIcon,
     MenuIcon,
     PhoneIcon,
     PlayIcon,
-    RefreshIcon,
+    GlobeIcon,
     ShieldCheckIcon,
     SupportIcon,
-    ViewGridIcon,
+    LibraryIcon,
     XIcon,
+    OfficeBuildingIcon
 } from '@heroicons/react/outline'
+
+import { GiCricketBat, GiHockey } from 'react-icons/gi'
+
+import { IoMdBasketball } from 'react-icons/md'
+
+import { IoFootball, IoBasketball } from 'react-icons/io5'
+
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
-const solutions = [
+const logoUrl = 'https://img.icons8.com/cotton/64/000000/news--v2.png'
+
+const news = [
     {
-        name: 'Analytics',
-        description: 'Get a better understanding of where your traffic is coming from.',
+        name: 'Trending',
+        description: 'Trending and Breaking News.',
         href: '#',
-        icon: ChartBarIcon,
+        icon: TrendingUpIcon,
     },
     {
-        name: 'Engagement',
-        description: 'Speak directly to your customers in a more meaningful way.',
+        name: 'Popular',
+        description: 'Whats stocks are rising?, Who won Cricket League yeterday?',
         href: '#',
-        icon: CursorClickIcon,
-    },
-    { name: 'Security', description: "Your customers' data will be safe and secure.", href: '#', icon: ShieldCheckIcon },
-    {
-        name: 'Integrations',
-        description: "Connect with third-party tools that you're already using.",
-        href: '#',
-        icon: ViewGridIcon,
+        icon: StarIcon,
     },
     {
-        name: 'Automations',
-        description: 'Build strategic funnels that will drive your customers to convert',
+        name: 'Covid Updates',
+        description: 'Updates on Covid Situation in India.',
         href: '#',
-        icon: RefreshIcon,
+        icon: GlobeIcon,
     },
+    {
+        name: 'Mumbai News',
+        description: "Whats going in Mumbai City.",
+        href: '#',
+        icon: OfficeBuildingIcon
+    },
+    {
+        name: 'Delhi News',
+        description: "Whats going in Delhi City.",
+        href: '#',
+        icon: LibraryIcon,
+    },
+
 ]
 const callsToAction = [
     { name: 'Watch Demo', href: '#', icon: PlayIcon },
     { name: 'Contact Sales', href: '#', icon: PhoneIcon },
 ]
-const resources = [
+const sports = [
     {
-        name: 'Help Center',
-        description: 'Get all of your questions answered in our forums or contact support.',
+        name: 'Football',
+        description: 'View LIVE Score of Barcelona VS Levante.',
         href: '#',
-        icon: SupportIcon,
+        icon: IoFootball,
     },
     {
-        name: 'Guides',
-        description: 'Learn how to maximize our platform to get the most out of it.',
+        name: 'Cricket',
+        description: 'View LIVE Score of SRH VS RR.',
         href: '#',
-        icon: BookmarkAltIcon,
+        icon: GiCricketBat,
     },
     {
-        name: 'Events',
-        description: 'See what meet-ups and other events we might be planning near you.',
+        name: 'Basketball',
+        description: 'View LIVE Score of Lakers VS Celtics.',
         href: '#',
-        icon: CalendarIcon,
+        icon: IoBasketball,
     },
-    { name: 'Security', description: 'Understand how we take your privacy seriously.', href: '#', icon: ShieldCheckIcon },
+    {
+        name: 'Hockey',
+        description: 'View LIVE Score of Carolina Hurricanes VS Columbus Blue Jackets ',
+        href: '#',
+        icon: GiHockey
+    },
 ]
+
 const recentPosts = [
-    { id: 1, name: 'Boost your conversion rate', href: '#' },
-    { id: 2, name: 'How to use search engine optimization to drive traffic to your site', href: '#' },
-    { id: 3, name: 'Improve your customer experience', href: '#' },
+    { id: 1, name: 'Harshal Patel: A consistent performer who is waiting for his', href: '#' },
+    { id: 2, name: 'World Archery Championship: Jyothi bags silver after compound team events', href: '#' },
+    { id: 3, name: 'Tokyo Olympics vindicates FIH’s special treatment of Indian hockey', href: '#' },
 ]
 
 function classNames(...classes) {
@@ -89,7 +111,7 @@ export default function Example() {
                             <span className="sr-only">Workflow</span>
                             <img
                                 className="h-8 w-auto sm:h-10"
-                                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                                src={logoUrl}
                                 alt=""
                             />
                         </a>
@@ -110,7 +132,7 @@ export default function Example() {
                                             'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                                         )}
                                     >
-                                        <span>Solutions</span>
+                                        <span>News</span>
                                         <ChevronDownIcon
                                             className={classNames(
                                                 open ? 'text-gray-600' : 'text-gray-400',
@@ -132,7 +154,7 @@ export default function Example() {
                                         <Popover.Panel className="absolute z-10 -ml-4 mt-3 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
                                             <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                                                 <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                                                    {solutions.map((item) => (
+                                                    {news.map((item) => (
                                                         <a
                                                             key={item.name}
                                                             href={item.href}
@@ -146,32 +168,12 @@ export default function Example() {
                                                         </a>
                                                     ))}
                                                 </div>
-                                                <div className="px-5 py-5 bg-gray-50 space-y-6 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
-                                                    {callsToAction.map((item) => (
-                                                        <div key={item.name} className="flow-root">
-                                                            <a
-                                                                href={item.href}
-                                                                className="-m-3 p-3 flex items-center rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
-                                                            >
-                                                                <item.icon className="flex-shrink-0 h-6 w-6 text-gray-400" aria-hidden="true" />
-                                                                <span className="ml-3">{item.name}</span>
-                                                            </a>
-                                                        </div>
-                                                    ))}
-                                                </div>
                                             </div>
                                         </Popover.Panel>
                                     </Transition>
                                 </>
                             )}
                         </Popover>
-
-                        <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-                            Pricing
-                        </a>
-                        <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
-                            Docs
-                        </a>
 
                         <Popover className="relative">
                             {({ open }) => (
@@ -182,7 +184,7 @@ export default function Example() {
                                             'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                                         )}
                                     >
-                                        <span>More</span>
+                                        <span>Live Sport Score</span>
                                         <ChevronDownIcon
                                             className={classNames(
                                                 open ? 'text-gray-600' : 'text-gray-400',
@@ -204,7 +206,7 @@ export default function Example() {
                                         <Popover.Panel className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0">
                                             <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                                                 <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                                                    {resources.map((item) => (
+                                                    {sports.map((item) => (
                                                         <a
                                                             key={item.name}
                                                             href={item.href}
@@ -220,7 +222,7 @@ export default function Example() {
                                                 </div>
                                                 <div className="px-5 py-5 bg-gray-50 sm:px-8 sm:py-8">
                                                     <div>
-                                                        <h3 className="text-sm tracking-wide font-medium text-gray-500 uppercase">Recent Posts</h3>
+                                                        <h3 className="text-sm tracking-wide font-medium text-gray-500 uppercase">Recent articles </h3>
                                                         <ul role="list" className="mt-4 space-y-4">
                                                             {recentPosts.map((post) => (
                                                                 <li key={post.id} className="text-base truncate">
@@ -234,7 +236,7 @@ export default function Example() {
                                                     <div className="mt-5 text-sm">
                                                         <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
                                                             {' '}
-                                                            View all posts <span aria-hidden="true">&rarr;</span>
+                                                            View all articles  <span aria-hidden="true">&rarr;</span>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -244,6 +246,13 @@ export default function Example() {
                                 </>
                             )}
                         </Popover>
+                        <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                            Weather
+                        </a>
+                        <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                            About
+                        </a>
+
                     </Popover.Group>
                     <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
                         <a href="#" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
@@ -251,7 +260,7 @@ export default function Example() {
                         </a>
                         <a
                             href="#"
-                            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-400 hover:text-black hover:bg-blue-200"
                         >
                             Sign up
                         </a>
@@ -275,7 +284,7 @@ export default function Example() {
                                 <div>
                                     <img
                                         className="h-8 w-auto"
-                                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                                        src={logoUrl}
                                         alt="Workflow"
                                     />
                                 </div>
@@ -288,7 +297,7 @@ export default function Example() {
                             </div>
                             <div className="mt-6">
                                 <nav className="grid gap-y-8">
-                                    {solutions.map((item) => (
+                                    {news.map((item) => (
                                         <a
                                             key={item.name}
                                             href={item.href}
@@ -303,14 +312,8 @@ export default function Example() {
                         </div>
                         <div className="py-6 px-5 space-y-6">
                             <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-                                <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                                    Pricing
-                                </a>
 
-                                <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
-                                    Docs
-                                </a>
-                                {resources.map((item) => (
+                                {sports.map((item) => (
                                     <a
                                         key={item.name}
                                         href={item.href}
@@ -319,11 +322,19 @@ export default function Example() {
                                         {item.name}
                                     </a>
                                 ))}
+
+                                <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                                    Weather
+                                </a>
+
+                                <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                                    About
+                                </a>
                             </div>
                             <div>
                                 <a
                                     href="#"
-                                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+                                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-400 hover:text-black hover:bg-blue-200"
                                 >
                                     Sign up
                                 </a>

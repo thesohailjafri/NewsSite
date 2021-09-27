@@ -1,5 +1,9 @@
 import React, { createContext, useReducer, useContext, useState, useCallback, useEffect } from 'react'
-import { fetchTrendingNews, fetchWeather } from './API'
+import {
+    fetchCovidStats,
+    fetchTrendingNews,
+    fetchWeather,
+} from './API'
 import reducer from './reducer'
 
 export const contextValue = createContext()
@@ -65,6 +69,16 @@ export const ContextProvider = ({ children }) => {
         }
     }, [])
 
+    const getCovidState = useCallback(async () => {
+        const res = await fetchCovidStats()
+        if (res) {
+            dispatch({
+                type: 'SET_COVID_STATS',
+                covidStats: res
+            })
+        }
+    }, [])
+
 
     useEffect(() => {
         getGeoLocation()
@@ -77,6 +91,10 @@ export const ContextProvider = ({ children }) => {
     useEffect(() => {
         getTrendingNews()
     }, [getTrendingNews])
+
+    useEffect(() => {
+        getCovidState()
+    }, [getCovidState])
 
     useEffect(() => {
         console.info(state)

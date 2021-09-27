@@ -35,7 +35,6 @@ const checkSingleSearchWord = async (payload) => {
 
         const res = await axios(options)
         const data = await res.data
-        console.log('weather', data)
         return (data)
     } catch (error) {
         console.error(error)
@@ -63,7 +62,6 @@ const fetchNews = async (term = 'breaking news', pageNumber = 1) => {
 
         const res = await axios(options)
         const data = await res.data
-        console.log('weather', data)
         return (data)
     } catch (error) {
         console.error(error)
@@ -84,10 +82,31 @@ const fetchWeather = async (lat = 1, lon = 1, excludeTerms = ['minutely', 'hourl
         }
         const res = await axios(options)
         const data = await res.data
-        console.log('weather', data)
         return (data)
     } catch (error) {
         console.error(error)
+    }
+}
+
+const fetchCovidStats = async () => {
+    try {
+        var options = {
+            method: 'GET',
+            url: 'https://corona-virus-world-and-india-data.p.rapidapi.com/api_india',
+            headers: {
+                'x-rapidapi-host': 'corona-virus-world-and-india-data.p.rapidapi.com',
+                'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY
+            }
+        }
+
+        const res = await axios(options)
+        console.log('lemon1')
+        const data = await res.data
+
+
+        return (data)
+    } catch (error) {
+
     }
 }
 
@@ -96,5 +115,6 @@ export {
     fetchTrendingNews,
     checkSingleSearchWord,
     fetchNews,
-    fetchWeather
+    fetchWeather,
+    fetchCovidStats
 }
