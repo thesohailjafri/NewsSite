@@ -7,6 +7,7 @@ function Home() {
 
     return (
         <div>
+            Home
             {/* <MainWeatherCard data={currentWeather} /> */}
         </div>
     )

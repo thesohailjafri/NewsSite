@@ -1,6 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
+import { Link } from 'react-router-dom'
 import {
     BookmarkAltIcon,
     CalendarIcon,
@@ -17,7 +18,8 @@ import {
     OfficeBuildingIcon
 } from '@heroicons/react/outline'
 
-import { GiCricketBat, GiHockey } from 'react-icons/gi'
+import { GiCricketBat, GiHockey, GiModernCity } from 'react-icons/gi'
+import { RiBuildingLine } from 'react-icons/ri'
 
 import { IoMdBasketball } from 'react-icons/md'
 
@@ -29,33 +31,33 @@ const logoUrl = 'https://img.icons8.com/cotton/64/000000/news--v2.png'
 
 const news = [
     {
-        name: 'Trending',
-        description: 'Trending and Breaking News.',
-        href: '#',
+        name: 'Trending News',
+        description: 'Read Trending and Breaking News.',
+        href: '#/news/trending',
         icon: TrendingUpIcon,
     },
     {
-        name: 'Popular',
-        description: 'Whats stocks are rising?, Who won Cricket League yeterday?',
-        href: '#',
+        name: 'Popular News',
+        description: "Read Whats stocks are rising?, Whats'going on in sport industry?",
+        href: '#/news/popular',
         icon: StarIcon,
     },
     {
         name: 'Covid Updates',
         description: 'Updates on Covid Situation in India.',
-        href: '#',
+        href: '#/news/covid',
         icon: GlobeIcon,
     },
     {
         name: 'Mumbai News',
-        description: "Whats going in Mumbai City.",
-        href: '#',
-        icon: OfficeBuildingIcon
+        description: "Read Whats going in Mumbai City?",
+        href: '#/news/mumbai',
+        icon: RiBuildingLine
     },
     {
         name: 'Delhi News',
-        description: "Whats going in Delhi City.",
-        href: '#',
+        description: "Read Whats going in Delhi City?",
+        href: '#/news/delhi',
         icon: LibraryIcon,
     },
 
@@ -67,26 +69,26 @@ const callsToAction = [
 const sports = [
     {
         name: 'Football',
-        description: 'View LIVE Score of Barcelona VS Levante.',
-        href: '#',
+        description: "Read what's your favourite Football team is upto?",
+        href: '#/sports/football',
         icon: IoFootball,
     },
     {
         name: 'Cricket',
-        description: 'View LIVE Score of SRH VS RR.',
-        href: '#',
+        description: "Read what Virat Kohli did this time.",
+        href: '#/sports/cricket',
         icon: GiCricketBat,
     },
     {
         name: 'Basketball',
-        description: 'View LIVE Score of Lakers VS Celtics.',
-        href: '#',
+        description: 'Read all the latest news about Basketball.',
+        href: '#/sports/basketball',
         icon: IoBasketball,
     },
     {
         name: 'Hockey',
-        description: 'View LIVE Score of Carolina Hurricanes VS Columbus Blue Jackets ',
-        href: '#',
+        description: 'Read all the latest news about all Hockey team.',
+        href: '#/sports/hockey',
         icon: GiHockey
     },
 ]
@@ -101,20 +103,20 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function Header() {
     return (
         <Popover className="relative bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
                 <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
                     <div className="flex justify-start lg:w-0 lg:flex-1">
-                        <a href="#">
+                        <Link to='/'>
                             <span className="sr-only">Workflow</span>
                             <img
                                 className="h-8 w-auto sm:h-10"
                                 src={logoUrl}
                                 alt=""
                             />
-                        </a>
+                        </Link>
                     </div>
                     <div className="-mr-2 -my-2 md:hidden">
                         <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -246,24 +248,32 @@ export default function Example() {
                                 </>
                             )}
                         </Popover>
-                        <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+
+                        <Link
+                            to='/weather'
+                            className="text-base font-medium text-gray-500 hover:text-gray-900">
                             Weather
-                        </a>
-                        <a href="#" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                        </Link>
+
+                        <Link
+                            to='/about'
+                            className="text-base font-medium text-gray-500 hover:text-gray-900">
                             About
-                        </a>
+                        </Link>
+
 
                     </Popover.Group>
                     <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                        <a href="#" className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
+                        <Link
+                            to='/signin'
+                            className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
                             Sign in
-                        </a>
-                        <a
-                            href="#"
-                            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-400 hover:text-black hover:bg-blue-200"
-                        >
+                        </Link>
+                        <Link
+                            to='/signup'
+                            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-400 hover:text-white hover:bg-blue-500">
                             Sign up
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -323,26 +333,35 @@ export default function Example() {
                                     </a>
                                 ))}
 
-                                <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                                <Link
+                                    to='/weather'
+                                    className="text-base font-medium text-gray-900 hover:text-gray-700">
                                     Weather
-                                </a>
+                                </Link>
 
-                                <a href="#" className="text-base font-medium text-gray-900 hover:text-gray-700">
+                                <Link
+                                    to='/about'
+                                    className="text-base font-medium text-gray-900 hover:text-gray-700">
                                     About
-                                </a>
+                                </Link>
+
+
                             </div>
                             <div>
-                                <a
-                                    href="#"
+
+                                <Link
+                                    to='/signup'
                                     className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-400 hover:text-black hover:bg-blue-200"
                                 >
                                     Sign up
-                                </a>
+                                </Link>
                                 <p className="mt-6 text-center text-base font-medium text-gray-500">
                                     Existing customer?{' '}
-                                    <a href="#" className="text-indigo-600 hover:text-indigo-500">
+                                    <Link
+                                        to='/signin'
+                                        className="text-indigo-600 hover:text-indigo-500">
                                         Sign in
-                                    </a>
+                                    </Link>
                                 </p>
                             </div>
                         </div>
