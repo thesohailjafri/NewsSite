@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2021-09-29T17:46:18.174Z" agent="5.0 (Windows)" etag="_r-flhK-1QJgxct4T-Db" version="15.3.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-09-29T17:47:53.236Z" agent="5.0 (Windows)" etag="-SqYtIhz2vjfCdsuGqve" version="15.3.8" type="github">
   <diagram id="prtHgNgQTEPvFCAcTncT" name="Page-1">
     <mxGraphModel dx="1422" dy="790" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="m54i1q6hWN53kRvHOZ7C-26" value="Vertical Container" style="swimlane;" vertex="1" parent="1">
-          <mxGeometry x="20" width="790" height="1050" as="geometry" />
+        <mxCell id="m54i1q6hWN53kRvHOZ7C-26" value="Newsdat Site Map" style="swimlane;" vertex="1" parent="1">
+          <mxGeometry x="20" width="790" height="800" as="geometry" />
         </mxCell>
         <mxCell id="m54i1q6hWN53kRvHOZ7C-1" value="home" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="m54i1q6hWN53kRvHOZ7C-26">
           <mxGeometry x="335" y="80" width="120" height="60" as="geometry" />
