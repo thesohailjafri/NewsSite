@@ -1,9 +1,11 @@
 import React from 'react'
 import { Container, Segment } from 'semantic-ui-react'
-import { Route, Switch, Redirect } from 'react-router'
+import { Route, Switch, Redirect, useRouteMatch, useLocation } from 'react-router'
 
 //components
 import Header from './components/Header'
+import SearchBar from './components/SearchBar'
+
 //general pages
 import Home from './PAGES/Home'
 import Weather from './PAGES/Weather'
@@ -30,6 +32,12 @@ import Hockey from './PAGES/SPORTS/Hockey'
 
 function App() {
 
+  let route = useLocation()
+  let routeMatchNews = useRouteMatch('/news')
+  let routeMatchSports = useRouteMatch('/sports')
+  let routeMatchHome = useRouteMatch('/')
+
+  console.log(route.pathname, { routeMatchNews, routeMatchSports, routeMatchHome })
 
   return (
     <div className="App">
@@ -37,32 +45,39 @@ function App() {
       {/* COMPONENTS */}
       <Header />
 
-      <Switch>
+      <div className="max-w-7xl mx-auto px-4 sm:px-4">
 
-        {/* GENERALS */}
-        <Route exact path='/' component={Home} />
-        <Route path='/weather' component={Weather} />
-        <Route path='/about' component={About} />
+        {
+          (routeMatchNews || routeMatchSports || routeMatchHome.isExact) &&
+          <SearchBar />
+        }
 
-        {/* AUTH */}
-        <Route path='/signin' component={SignIn} />
-        <Route path='/signup' component={SignUp} />
+        <Switch>
 
-        {/* NEWS */}
-        <Route path='/news/trending' component={Trending} />
-        <Route path='/news/popular' component={Popular} />
-        <Route path='/news/covid' component={Covid} />
-        <Route path='/news/mumbai' component={Mumbai} />
-        <Route path='/news/delhi' component={Delhi} />
+          {/* GENERALS */}
+          <Route exact path='/' component={Home} />
+          <Route path='/weather' component={Weather} />
+          <Route path='/about' component={About} />
+
+          {/* AUTH */}
+          <Route path='/signin' component={SignIn} />
+          <Route path='/signup' component={SignUp} />
+
+          {/* NEWS */}
+          <Route path='/news/trending' component={Trending} />
+          <Route path='/news/popular' component={Popular} />
+          <Route path='/news/covid' component={Covid} />
+          <Route path='/news/mumbai' component={Mumbai} />
+          <Route path='/news/delhi' component={Delhi} />
 
 
-        {/* SPORTS */}
-        <Route path='/sports/football' component={Football} />
-        <Route path='/sports/cricket' component={Cricket} />
-        <Route path='/sports/basketball' component={Basketball} />
-        <Route path='/sports/hockey' component={Hockey} />
-
-      </Switch>
+          {/* SPORTS */}
+          <Route path='/sports/football' component={Football} />
+          <Route path='/sports/cricket' component={Cricket} />
+          <Route path='/sports/basketball' component={Basketball} />
+          <Route path='/sports/hockey' component={Hockey} />
+        </Switch>
+      </div>
 
 
     </div>
