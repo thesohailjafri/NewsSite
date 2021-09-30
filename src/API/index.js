@@ -1,10 +1,10 @@
 import axios from 'axios'
-const fetchTrendingNews = async (country = 'in') => {
+const fetchTrendingNews = async (country = 'in', pageSize = 20, pageNumber = 1) => {
     try {
         const options = {
             method: 'GET',
             url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/TrendingNewsAPI',
-            params: { pageNumber: '1', pageSize: '10', withThumbnails: 'false', location: country },
+            params: { pageNumber, pageSize, withThumbnails: 'false', location: country },
             headers: {
                 'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com',
                 'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY

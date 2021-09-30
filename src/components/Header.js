@@ -105,9 +105,9 @@ function classNames(...classes) {
 
 export default function Header() {
     return (
-        <Popover className="relative bg-white">
+        <Popover className="relative bg-white shadow">
             <div className="max-w-7xl mx-auto px-4 sm:px-4">
-                <div className="flex justify-between items-center border-b-2 border-gray-100 py-4 ">
+                <div className="flex justify-between items-center  py-4 ">
                     <div className="flex justify-start">
                         <Link to='/'>
                             <span className="sr-only">Workflow</span>

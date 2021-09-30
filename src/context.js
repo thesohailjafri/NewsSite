@@ -98,7 +98,7 @@ export const ContextProvider = ({ children }) => {
     }, [getCovidState])
 
     useEffect(() => {
-        console.info(state)
+        console.info(state.trendingNews)
     }, [state])
 
 
