@@ -1,0 +1,40 @@
+.cs_confirmed::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: .5rem;
+  border-radius: 7.5px;
+  background-color: #9CA3AF;
+}
+
+.cs_active::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: .5rem;
+  border-radius: 7.5px;
+  background-color: #818CF8;
+}
+
+.cs_recovered::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: .5rem;
+  border-radius: 7.5px;
+  background-color: #34D399;
+}
+
+.cs_death::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: .5rem;
+  border-radius: 7.5px;
+  background-color: #F87171;
+}
+/*# sourceMappingURL=App.css.map */

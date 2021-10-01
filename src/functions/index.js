@@ -8,6 +8,13 @@ const toCapitalize = (str) => {
     return (str2)
 }
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+}
+
+
+
 export {
-    toCapitalize
+    toCapitalize,
+    numberWithCommas
 }

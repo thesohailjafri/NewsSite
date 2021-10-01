@@ -1,5 +1,4 @@
 import React from 'react'
-import { Container, Segment } from 'semantic-ui-react'
 import { Route, Switch, Redirect, useRouteMatch, useLocation } from 'react-router'
 
 //components

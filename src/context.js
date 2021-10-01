@@ -15,7 +15,9 @@ export const ContextProvider = ({ children }) => {
         user: null,
         country: 'in',
         currentWeather: null,
-        trendingNews: null
+        trendingNews: null,
+        covidStats: null,
+        totalCovidStats: null
     }
 
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -73,9 +75,20 @@ export const ContextProvider = ({ children }) => {
     const getCovidState = useCallback(async () => {
         const res = await fetchCovidStats()
         if (res) {
+            let myData = []
+            for (const [key, value] of Object.entries(res.state_wise)) {
+                myData.push({ 'stateName': key.replaceAll(' ', '_'), 'stateData': value })
+            }
+            console.log({ myData })
+
+            dispatch({
+                type: 'SET_TOTAL_COVID_STATS',
+                totalCovidStats: res.total_values
+            })
+
             dispatch({
                 type: 'SET_COVID_STATS',
-                covidStats: res
+                covidStats: myData
             })
         }
     }, [])
@@ -98,7 +111,7 @@ export const ContextProvider = ({ children }) => {
     }, [getCovidState])
 
     useEffect(() => {
-        console.info(state.trendingNews)
+        console.info(state)
     }, [state])
 
 

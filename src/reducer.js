@@ -22,6 +22,11 @@ export default function reducer(state, action) {
                 ...state,
                 covidStats: action.covidStats
             }
+        case 'SET_TOTAL_COVID_STATS':
+            return {
+                ...state,
+                totalCovidStats: action.totalCovidStats
+            }
         default:
             break
     }

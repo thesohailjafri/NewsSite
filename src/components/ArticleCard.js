@@ -4,7 +4,7 @@ function ArticleCard({ data }) {
     let objDate = new Date(myDate)
     return (
         <div
-            className="rounded overflow-hidden bg-white shadow"
+            className="rounded overflow-hidden bg-white shadow cursor-pointer transform scale-100 transition ease-in hover:scale-103 hover:shadow-lg"
         >
             <img src={data.image.url ? data.image.url :
                 'https://www.thehindu.com/static/theme/default/base/img/og-image.jpg'} alt={data.title}
@@ -12,12 +12,21 @@ function ArticleCard({ data }) {
             />
             <div className="p-4">
                 <p
-                    className='h-16 overflow-ellipsis'
-                >{data.title}</p>
-                <span
-                    className="italic "
-                >Pub. Date : </span>
-                <span>{`${objDate.getDate()}-${objDate.getMonth()}-${objDate.getFullYear()}`}</span>
+                    className=' h-24 overflow-hidden '>
+                    {data.title}.
+                </p>
+
+                <p className="my-1">
+                    <span
+                        className="italic ">Published Date</span>
+                    <span>
+                        : {`${objDate.getDate()}-${objDate.getMonth()}-${objDate.getFullYear()}`}
+                    </span>
+                </p>
+
+
+                <p >
+                    <span className="italic ">Provider</span>:<a href={data.url} target="blank"> {data.provider.name}</a></p>
             </div>
 
         </div>

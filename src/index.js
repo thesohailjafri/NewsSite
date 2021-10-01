@@ -7,9 +7,8 @@ import { HashRouter } from 'react-router-dom'
 import { createBrowserHistory } from "history"
 import { ContextProvider } from './context'
 /* Import Styling*/
-import './index.css'
-import './App.css'
-import 'semantic-ui-css/semantic.min.css'
+import './style/index.css'
+import './style/App.css'
 
 const customHistory = createBrowserHistory()
 
