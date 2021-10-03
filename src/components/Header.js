@@ -3,6 +3,7 @@ import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { useAppContext } from '../context'
 import { Link } from 'react-router-dom'
+import logo from '../static/SVG/logo.svg'
 import {
     TrendingUpIcon,
     StarIcon,
@@ -16,8 +17,7 @@ import { RiBuildingLine } from 'react-icons/ri'
 import { IoFootball, IoBasketball } from 'react-icons/io5'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
-const logoUrl = 'https://img.icons8.com/cotton/64/000000/news--v2.png'
-
+const logoUrl = logo
 const news = [
     {
         name: 'Trending News',
@@ -329,7 +329,7 @@ export default function Header() {
                         </Link>
                         <Link
                             to='/signup'
-                            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-sm shadow-sm text-base font-medium text-white bg-indigo-600 hover:text-white hover:bg-indigo-700">
+                            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent shadow-sm rounded-sm text-base font-medium text-white bg-indigo-600 hover:text-white hover:bg-indigo-700">
                             Sign up
                         </Link>
                     </div>

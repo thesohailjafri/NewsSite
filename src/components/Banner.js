@@ -1,10 +1,8 @@
 import React from 'react'
-import dummy from '../static/SVG/newspaper.svg'
+import { imgError } from '../functions'
 
 function Banner({ data }) {
-    let heroUrl = data ? data[0].image.url
-        :
-        dummy
+
 
     return (
         <div
@@ -15,7 +13,9 @@ function Banner({ data }) {
         ">
             <img
                 className="absolute w-full top-0 left-0 bg-cover"
-                src={heroUrl} alt="" />
+                src={data[0].image.url}
+                onError={(e) => imgError(e.target)}
+                alt="" />
 
             <div id="shade"
                 className="absolute w-full h-full opacity-30
