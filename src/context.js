@@ -2,7 +2,6 @@ import React, { createContext, useReducer, useContext, useState, useCallback, us
 import {
     fetchCovidStats,
     fetchTrendingNews,
-    fetchWeather,
 } from './API'
 import reducer from './reducer'
 
@@ -10,105 +9,94 @@ export const contextValue = createContext()
 
 export const ContextProvider = ({ children }) => {
     let initialState = {
-        latitude: 19.0760,
-        longitude: 72.8777,
         user: null,
         country: 'in',
         currentWeather: null,
         trendingNews: null,
         covidStats: null,
-        totalCovidStats: null
+        globalCovidStats: null
     }
 
     const [state, dispatch] = useReducer(reducer, initialState)
 
     const [loading, setLoading] = useState(true)
 
-
-    const getGeoLocation = useCallback(() => {
-        let pos = {
-            latitude: 19.0760,
-            longitude: 72.8777,
-        }
-        function success(pos) {
-            var crd = pos.coords
-            pos.latitude = crd.latitude
-            pos.longitude = crd.longitude
-            dispatch({
-                type: 'SET_GEO_LOCATION',
-                pos: pos
-
-            })
-        }
-        function error(err) {
-            console.warn(`ERROR(${err.code}): ${err.message}`)
-        }
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(success, error)
-        }
-
-        return pos
-    }, [])
-
-    const getWeather = useCallback(async (excludeTerms = ['minutely', 'daily', 'alerts']) => {
-        const weatherD = await fetchWeather(state.latitude, state.longitude, excludeTerms)
-        if (weatherD) {
-            dispatch({
-                type: 'SET_WEATHER',
-                currentWeather: weatherD.current,
-                hourlyWeather: weatherD.hourly,
-            })
-        }
-    }, [state.latitude, state.longitude])
+    const changeCountry = (which) => {
+        console.log(which)
+        dispatch({
+            type: 'SET_COUNTRY',
+            country: which
+        })
+    }
 
     const getTrendingNews = useCallback(async () => {
-        const res = await fetchTrendingNews()
+        setLoading(true)
+        const res = await fetchTrendingNews(state.country)
         if (res) {
             dispatch({
                 type: 'SET_TRENDING_NEWS',
                 trendingNews: res.value
             })
+
+            setTimeout(() => {
+                setLoading(false)
+            }, 500)
+
+        }
+    }, [state.country])
+
+    const getGlobalCovidStat = useCallback(async () => {
+        const res = await fetchCovidStats()
+
+        if (res) {
+            dispatch({
+                type: 'SET_GLOBAL_COVID_STATS',
+                globalCovidStats: res.response[0]
+            })
         }
     }, [])
 
-    const getCovidState = useCallback(async () => {
-        const res = await fetchCovidStats()
+    const getCovidStat = useCallback(async () => {
+        let countryName
+
+        if (state.country === 'in') {
+            countryName = 'india'
+        }
+        else if (state.country === 'us') {
+            countryName = 'usa'
+        }
+        else if (state.country === 'uk') {
+            countryName = 'uk'
+        } else {
+            countryName = 'all'
+        }
+
+        const res = await fetchCovidStats(countryName)
+
         if (res) {
-            let myData = []
-            for (const [key, value] of Object.entries(res.state_wise)) {
-                myData.push({ 'stateName': key.replaceAll(' ', '_'), 'stateData': value })
-            }
-            console.log({ myData })
-
-            dispatch({
-                type: 'SET_TOTAL_COVID_STATS',
-                totalCovidStats: res.total_values
-            })
-
             dispatch({
                 type: 'SET_COVID_STATS',
-                covidStats: myData
+                covidStats: res.response[0]
             })
         }
-    }, [])
+
+    }, [state.country])
 
 
-    useEffect(() => {
-        getGeoLocation()
-    }, [getGeoLocation])
 
-    useEffect(() => {
-        getWeather()
-    }, [getWeather])
 
     useEffect(() => {
         getTrendingNews()
     }, [getTrendingNews])
 
     useEffect(() => {
-        getCovidState()
-    }, [getCovidState])
+        getCovidStat()
+    }, [getCovidStat])
+
+    useEffect(() => {
+        getGlobalCovidStat()
+    }, [getGlobalCovidStat])
+
 
     useEffect(() => {
         console.info(state)
@@ -121,7 +109,8 @@ export const ContextProvider = ({ children }) => {
             ...state,
             dispatch,
             loading,
-            setLoading
+            setLoading,
+            changeCountry
         }}>
         {children}
     </contextValue.Provider>

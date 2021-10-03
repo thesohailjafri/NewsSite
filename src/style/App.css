@@ -37,4 +37,27 @@
   border-radius: 7.5px;
   background-color: #F87171;
 }
+
+.loader {
+  -webkit-animation: spin infinite 2s;
+          animation: spin infinite 2s;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+
+@keyframes spin {
+  0% {
+    rotate: 0deg;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
 /*# sourceMappingURL=App.css.map */

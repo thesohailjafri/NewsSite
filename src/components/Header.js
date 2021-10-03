@@ -1,30 +1,19 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
+import { useAppContext } from '../context'
 import { Link } from 'react-router-dom'
 import {
-    BookmarkAltIcon,
-    CalendarIcon,
     TrendingUpIcon,
     StarIcon,
     MenuIcon,
-    PhoneIcon,
-    PlayIcon,
     GlobeIcon,
-    ShieldCheckIcon,
-    SupportIcon,
     LibraryIcon,
     XIcon,
-    OfficeBuildingIcon
 } from '@heroicons/react/outline'
-
-import { GiCricketBat, GiHockey, GiModernCity } from 'react-icons/gi'
+import { GiCricketBat, GiHockey, GiAmericanFootballPlayer, GiTowerBridge, GiIndianPalace } from 'react-icons/gi'
 import { RiBuildingLine } from 'react-icons/ri'
-
-import { IoMdBasketball } from 'react-icons/md'
-
 import { IoFootball, IoBasketball } from 'react-icons/io5'
-
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
 const logoUrl = 'https://img.icons8.com/cotton/64/000000/news--v2.png'
@@ -62,9 +51,26 @@ const news = [
     },
 
 ]
-const callsToAction = [
-    { name: 'Watch Demo', href: '#', icon: PlayIcon },
-    { name: 'Contact Sales', href: '#', icon: PhoneIcon },
+
+const country = [
+    {
+        name: 'India',
+        code: 'in',
+        description: 'Click to change location to India.',
+        icon: GiIndianPalace
+    },
+    {
+        name: 'United States',
+        code: 'us',
+        description: 'Click to change location to United State.',
+
+        icon: GiAmericanFootballPlayer
+    }, {
+        name: 'United Kingdom',
+        code: 'uk',
+        description: 'Click to change location to United Kingdom.',
+        icon: GiTowerBridge
+    },
 ]
 const sports = [
     {
@@ -104,6 +110,7 @@ function classNames(...classes) {
 }
 
 export default function Header() {
+    const { changeCountry } = useAppContext()
     return (
         <Popover className="relative bg-white shadow">
             <div className="max-w-7xl mx-auto px-4 sm:px-4">
@@ -118,13 +125,13 @@ export default function Header() {
                             />
                         </Link>
                     </div>
-                    <div className="-mr-2 -my-2  lg:hidden xl:hidden 2xl:hidden">
+                    <div className="-mr-2 -my-2  xl:hidden 2xl:hidden">
                         <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                             <span className="sr-only">Open menu</span>
                             <MenuIcon className="h-6 w-6" aria-hidden="true" />
                         </Popover.Button>
                     </div>
-                    <Popover.Group as="nav" className="hidden lg:flex xl:flex 2xl:flex space-x-10">
+                    <Popover.Group as="nav" className="hidden  xl:flex 2xl:flex space-x-10">
                         <Link
                             to='/'
                             className="p-1 text-base font-medium text-gray-500 hover:text-gray-900">
@@ -254,11 +261,57 @@ export default function Header() {
                             )}
                         </Popover>
 
-                        {/* <Link
-                            to='/weather'
-                            className="p-1 text-base font-medium text-gray-500 hover:text-gray-900">
-                            Weather
-                        </Link> */}
+                        <Popover className="relative">
+                            {({ open }) => (
+                                <>
+                                    <Popover.Button
+                                        className={classNames(
+                                            open ? 'text-gray-900' : 'text-gray-500',
+                                            'p-1 group bg-white rounded-sm inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                                        )}
+                                    >
+                                        <span>Country</span>
+                                        <ChevronDownIcon
+                                            className={classNames(
+                                                open ? 'text-gray-600' : 'text-gray-400',
+                                                'ml-2 h-5 w-5 group-hover:text-gray-500'
+                                            )}
+                                            aria-hidden="true"
+                                        />
+                                    </Popover.Button>
+
+                                    <Transition
+                                        as={Fragment}
+                                        enter="transition ease-out duration-200"
+                                        enterFrom="opacity-0 translate-y-1"
+                                        enterTo="opacity-100 translate-y-0"
+                                        leave="transition ease-in duration-150"
+                                        leaveFrom="opacity-100 translate-y-0"
+                                        leaveTo="opacity-0 translate-y-1"
+                                    >
+                                        <Popover.Panel className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0">
+                                            <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                                                <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                                                    {country.map((item) => (
+                                                        <p
+                                                            key={item.name}
+                                                            onClick={() => changeCountry(item.code)}
+                                                            className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 cursor-pointer"
+                                                        >
+                                                            <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" />
+                                                            <div className="ml-4">
+                                                                <p className="text-base font-medium text-gray-900">{item.name}</p>
+                                                                <p className="mt-1 text-sm text-gray-500">{item.description}</p>
+                                                            </div>
+                                                        </p>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        </Popover.Panel>
+                                    </Transition>
+                                </>
+                            )}
+                        </Popover>
 
                         <Link
                             to='/about'
@@ -268,7 +321,7 @@ export default function Header() {
 
 
                     </Popover.Group>
-                    <div className="hidden lg:flex xl:flex 2xl:flex items-center justify-end md:flex-1 lg:w-0">
+                    <div className="hidden xl:flex 2xl:flex items-center justify-end md:flex-1 lg:w-0">
                         <Link
                             to='/signin'
                             className="p-1 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">
@@ -276,7 +329,7 @@ export default function Header() {
                         </Link>
                         <Link
                             to='/signup'
-                            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-sm shadow-sm text-base font-medium text-white bg-indigo-400 hover:text-white hover:bg-indigo-700">
+                            className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-sm shadow-sm text-base font-medium text-white bg-indigo-600 hover:text-white hover:bg-indigo-700">
                             Sign up
                         </Link>
                     </div>
@@ -292,7 +345,7 @@ export default function Header() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
             >
-                <Popover.Panel focus className=" z-50 absolute top-0 inset-x-0 p-2 transition transform origin-top-right  lg:hidden xl:hidden">
+                <Popover.Panel focus className=" z-50 absolute top-0 inset-x-0 p-2 transition transform origin-top-right xl:hidden 2xl:hidden">
                     <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
                         <div className="pt-5 pb-6 px-5">
                             <div className="flex items-center justify-between">
@@ -325,18 +378,8 @@ export default function Header() {
                                 </nav>
                             </div>
                         </div>
-                        <div className="py-6 px-5 space-y-6">
+                        <div className="py-4 px-5 space-y-6">
                             <div className="grid grid-cols-2 gap-y-4 gap-x-8">
-
-                                {sports.map((item) => (
-                                    <a
-                                        key={item.name}
-                                        href={item.href}
-                                        className="text-base font-medium text-gray-900 hover:text-gray-700"
-                                    >
-                                        {item.name}
-                                    </a>
-                                ))}
 
                                 <Link
                                     to='/'
@@ -349,6 +392,40 @@ export default function Header() {
                                     className="text-base font-medium text-gray-900 hover:text-gray-700">
                                     About
                                 </Link>
+                            </div>
+
+
+                        </div>
+                        <div className="py-4 px-5 space-y-6">
+                            <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+
+
+                                {sports.map((item) => (
+                                    <a
+                                        key={item.name}
+                                        href={item.href}
+                                        className="text-base font-medium text-gray-900 hover:text-gray-700"
+                                    >
+                                        {item.name}
+                                    </a>
+                                ))}
+                            </div>
+
+                        </div>
+                        <div className="py-4 px-5 space-y-6">
+                            <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+
+                                {country.map((item) => (
+                                    <p
+                                        key={item.name}
+                                        onClick={() => changeCountry(item.code)}
+                                        className="text-base font-medium text-gray-900 hover:text-gray-700 cursor-pointer"
+                                    >
+                                        {item.name}
+                                    </p>
+                                ))}
+
+
 
 
                             </div>
@@ -369,6 +446,8 @@ export default function Header() {
                                     </Link>
                                 </p>
                             </div>
+
+
                         </div>
                     </div>
                 </Popover.Panel>

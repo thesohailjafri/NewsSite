@@ -1,4 +1,5 @@
 import React from 'react'
+import { imgError } from '../functions'
 function ArticleCard({ data }) {
     let myDate = data.datePublished ? data.datePublished : ''
     let objDate = new Date(myDate)
@@ -6,8 +7,7 @@ function ArticleCard({ data }) {
         <div
             className="rounded overflow-hidden bg-white shadow cursor-pointer transform scale-100 transition ease-in hover:scale-103 hover:shadow-lg"
         >
-            <img src={data.image.url ? data.image.url :
-                'https://www.thehindu.com/static/theme/default/base/img/og-image.jpg'} alt={data.title}
+            <img src={data.image.url} onError={(e) => imgError(e.target)} alt={data.title}
                 className="h-28 w-full object-cover bg-no-repeat"
             />
             <div className="p-4">

@@ -45,3 +45,18 @@
     border-radius: 7.5px;
     background-color: #F87171;
 }
+
+.loader {
+    animation: spin infinite 2s;
+}
+
+@keyframes spin {
+    0% {
+        rotate: 0deg;
+    }
+
+    100% {
+        rotate: 360deg;
+
+    }
+}

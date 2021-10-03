@@ -1,31 +1,26 @@
-export default function reducer(state, action) {
-    switch (action.type) {
-        case 'SET_GEO_LOCATION':
+export default function reducer(state, payload) {
+    switch (payload.type) {
+
+        case 'SET_COUNTRY':
             return {
                 ...state,
-                latitude: action.pos.latitude,
-                longitude: action.pos.longitude
+                country: payload.country
             }
-        case 'SET_WEATHER':
-            return {
-                ...state,
-                currentWeather: action.currentWeather,
-                hourlyWeather: action.hourlyWeather,
-            }
+
         case 'SET_TRENDING_NEWS':
             return {
                 ...state,
-                trendingNews: action.trendingNews
+                trendingNews: payload.trendingNews
             }
         case 'SET_COVID_STATS':
             return {
                 ...state,
-                covidStats: action.covidStats
+                covidStats: payload.covidStats
             }
-        case 'SET_TOTAL_COVID_STATS':
+        case 'SET_GLOBAL_COVID_STATS':
             return {
                 ...state,
-                totalCovidStats: action.totalCovidStats
+                globalCovidStats: payload.globalCovidStats
             }
         default:
             break
