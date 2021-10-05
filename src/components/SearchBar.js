@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaSearch } from 'react-icons/fa'
 
 function SearchBar() {
     return (
@@ -8,13 +9,13 @@ function SearchBar() {
                 type="text"
                 placeholder="Search News"
                 id="searchbar" />
-            <input
-                className="p-2 text-md rounded-sm min-w-150 bg-indigo-600 text-white hover:bg-indogp-700 sm:min-w-100"
+            <button
+                className="p-2 inline-flex items-center justify-center text-md rounded-sm min-w-150 font-semibold bg-indigo-600 text-white hover:bg-indigo-800 sm:min-w-100"
                 type="button"
                 for="searchbar"
                 value="Search"
             // onClick={(e) => console.log(e)}
-            />
+            ><FaSearch className="inline-block mr-2" />Search</button>
         </form>
     )
 }

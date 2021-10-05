@@ -1,13 +1,17 @@
 import React from 'react'
 import { imgError } from '../functions'
+
+
+import dumImg from '../static/images/dummyNews.jpg'
+
 function ArticleCard({ data }) {
-    let myDate = data.datePublished ? data.datePublished : ''
+    let myDate = data.published_date ? data.published_date : ''
     let objDate = new Date(myDate)
     return (
         <div
             className="rounded overflow-hidden bg-white shadow cursor-pointer transform scale-100 transition ease-in hover:scale-103 hover:shadow-lg"
         >
-            <img src={data.image.url} onError={(e) => imgError(e.target)} alt={data.title}
+            <img src={data.media ? data.media : dumImg} onError={(e) => imgError(e.target)} alt={data.title}
                 className="h-28 w-full object-cover bg-no-repeat"
             />
             <div className="p-4">
@@ -26,7 +30,7 @@ function ArticleCard({ data }) {
 
 
                 <p >
-                    <span className="italic ">Provider</span>:<a href={data.url} target="blank"> {data.provider.name}</a></p>
+                    <span className="italic ">Provider</span>:<a href={data.link} target="blank"> {data.clean_url}</a></p>
             </div>
 
         </div>

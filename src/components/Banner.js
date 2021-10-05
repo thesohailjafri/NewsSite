@@ -6,14 +6,14 @@ function Banner({ data }) {
 
     return (
         <div
-            className="mb-4 w-full h-80 bg-cover relative overflow-hidden bg-black border-8 border-white rounded shadow-md
+            className=" w-full h-80 bg-cover relative overflow-hidden bg-black border-8 border-white rounded shadow-md
             lg:h-72 
              md:h-64 md:border-4
               sm:h-48 sm:border-4
         ">
             <img
                 className="absolute w-full top-0 left-0 bg-cover"
-                src={data[0].image.url}
+                src={data.media}
                 onError={(e) => imgError(e.target)}
                 alt="" />
 
@@ -26,7 +26,7 @@ function Banner({ data }) {
                 className="absolute text-white bottom-0 text-3xl uppercase font-bold p-3 pr-6 shadow-2xl font-sans
             sm:text-lg
             "
-            >{data[0]?.title}</p>}
+            >{data?.title}</p>}
 
         </div>
 

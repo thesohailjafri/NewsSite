@@ -1,82 +1,20 @@
 import axios from 'axios'
-const fetchTrendingNews = async (country, pageSize = 20, pageNumber = 1) => {
+
+
+const fetchNews = async (search = 'india', pageNumber, pageSize) => {
     try {
-        const options = {
-            method: 'GET',
-            url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/TrendingNewsAPI',
-            params: { pageNumber, pageSize, withThumbnails: 'false', location: country },
-            headers: {
-                'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com',
-                'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY
-            }
-        }
 
-        const res = await axios(options)
-        const data = await res.data
-        return (data)
-    } catch (error) {
-        console.error(error)
-    }
-}
-
-const checkSingleSearchWord = async (payload) => {
-    try {
-        var options = {
-            method: 'POST',
-            url: 'https://bing-spell-check2.p.rapidapi.com/spellcheck',
-            params: { mode: 'spell' },
-            headers: {
-                'content-type': 'application/x-www-form-urlencoded',
-                'x-rapidapi-host': 'bing-spell-check2.p.rapidapi.com',
-                'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY
-            },
-            data: { Text: payload }
-        }
-
-        const res = await axios(options)
-        const data = await res.data
-        return (data)
-    } catch (error) {
-        console.error(error)
-    }
-}
-
-const fetchPopularNews = async (country, pageSize = 20, pageNumber = 1) => {
-    // https://newsapi.org/v2/top-headlines?sources=bbc-news&apiKey=c719b224e2f341368f5048bed2d61621
-    try {
-        const options = {
-            method: 'GET',
-            url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/TrendingNewsAPI',
-            params: { page: pageNumber, pageSize, location: country },
-            headers: {
-                'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com',
-                'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY
-            }
-        }
-
-        const res = await axios(options)
-        const data = await res.data
-        return (data)
-    } catch (error) {
-        console.error(error)
-    }
-}
-
-const fetchNews = async (term = 'breaking news', pageNumber = 1) => {
-    try {
         var options = {
             method: 'GET',
-            url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI',
+            url: 'https://free-news.p.rapidapi.com/v1/search',
             params: {
-                q: term,
-                pageNumber: pageNumber,
-                pageSize: '10',
-                autoCorrect: 'true',
-                fromPublishedDate: 'null',
-                toPublishedDate: 'null'
+                q: search,
+                lang: 'en',
+                page: pageNumber,
+                page_size: pageSize
             },
             headers: {
-                'x-rapidapi-host': 'contextualwebsearch-websearch-v1.p.rapidapi.com',
+                'x-rapidapi-host': 'free-news.p.rapidapi.com',
                 'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY
             }
         }
@@ -132,8 +70,6 @@ const fetchCovidStats = async (country = 'all') => {
 
 
 export {
-    fetchTrendingNews,
-    checkSingleSearchWord,
     fetchNews,
     fetchWeather,
     fetchCovidStats

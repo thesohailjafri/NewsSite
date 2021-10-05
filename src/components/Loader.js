@@ -1,6 +1,4 @@
-import React, { useEffect, useRef } from 'react'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
-import { gsap } from "gsap"
 
 function Loader() {
 

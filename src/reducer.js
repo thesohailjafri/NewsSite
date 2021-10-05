@@ -12,6 +12,22 @@ export default function reducer(state, payload) {
                 ...state,
                 trendingNews: payload.trendingNews
             }
+        case 'SET_MUMBAI_NEWS':
+            return {
+                ...state,
+                mumbaiNews: payload.mumbaiNews
+            }
+        case 'SET_DELHI_NEWS':
+            return {
+                ...state,
+                delhiNews: payload.delhiNews
+            }
+
+        case 'SET_COVID_NEWS':
+            return {
+                ...state,
+                covidNews: payload.covidNews
+            }
         case 'SET_COVID_STATS':
             return {
                 ...state,
@@ -21,6 +37,16 @@ export default function reducer(state, payload) {
             return {
                 ...state,
                 globalCovidStats: payload.globalCovidStats
+            }
+        case 'SET_TOTAL_PAGES':
+            return {
+                ...state,
+                totalPages: payload.totalPages
+            }
+        case 'SET_PAGE_NUMBER':
+            return {
+                ...state,
+                pageNumber: payload.pageNumber
             }
         default:
             break

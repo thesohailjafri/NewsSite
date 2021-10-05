@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useContext, useState, useCallback, useEffect } from 'react'
 import {
     fetchCovidStats,
-    fetchTrendingNews,
+    fetchNews,
 } from './API'
 import reducer from './reducer'
 
@@ -10,40 +10,79 @@ export const contextValue = createContext()
 export const ContextProvider = ({ children }) => {
     let initialState = {
         user: null,
-        country: 'in',
         currentWeather: null,
         trendingNews: null,
+        mumbaiNews: null,
+        delhiNews: null,
+        covidNews: null,
         covidStats: null,
-        globalCovidStats: null
+        globalCovidStats: null,
+        totalPages: 0,
+        pageSize: 20,
+        pageNumber: 1
     }
+    const homeNewsSize = 8
 
     const [state, dispatch] = useReducer(reducer, initialState)
 
     const [loading, setLoading] = useState(true)
 
-    const changeCountry = (which) => {
-        console.log(which)
-        dispatch({
-            type: 'SET_COUNTRY',
-            country: which
-        })
-    }
 
     const getTrendingNews = useCallback(async () => {
         setLoading(true)
-        const res = await fetchTrendingNews(state.country)
+        const res = await fetchNews('india trending', 1, homeNewsSize)
         if (res) {
             dispatch({
                 type: 'SET_TRENDING_NEWS',
-                trendingNews: res.value
+                trendingNews: res.articles
             })
+
+            // dispatch({
+            //     type: 'SET_TOTAL_PAGES',
+            //     totalPages: res.total_pages
+            // })
+
+            // dispatch({
+            //     type: 'SET_PAGE_NUMBER',
+            //     pageNumber: res.page
+            // })
 
             setTimeout(() => {
                 setLoading(false)
             }, 500)
-
         }
-    }, [state.country])
+    }, [])
+
+    const getMumbaiNews = useCallback(async () => {
+        const res = await fetchNews('mumbai', 1, homeNewsSize)
+        if (res) {
+            dispatch({
+                type: 'SET_MUMBAI_NEWS',
+                mumbaiNews: res.articles
+            })
+        }
+    }, [])
+
+    const getDelhiNews = useCallback(async () => {
+        const res = await fetchNews('delhi', 1, homeNewsSize)
+        if (res) {
+            dispatch({
+                type: 'SET_DELHI_NEWS',
+                delhiNews: res.articles
+            })
+        }
+    }, [])
+
+    const getCovidNews = useCallback(async () => {
+        const res = await fetchNews('covid', 1, homeNewsSize)
+        if (res) {
+            dispatch({
+                type: 'SET_COVID_NEWS',
+                covidNews: res.articles
+            })
+        }
+    }, [])
+
 
     const getGlobalCovidStat = useCallback(async () => {
         const res = await fetchCovidStats()
@@ -57,21 +96,9 @@ export const ContextProvider = ({ children }) => {
     }, [])
 
     const getCovidStat = useCallback(async () => {
-        let countryName
 
-        if (state.country === 'in') {
-            countryName = 'india'
-        }
-        else if (state.country === 'us') {
-            countryName = 'usa'
-        }
-        else if (state.country === 'uk') {
-            countryName = 'uk'
-        } else {
-            countryName = 'all'
-        }
 
-        const res = await fetchCovidStats(countryName)
+        const res = await fetchCovidStats('india')
 
         if (res) {
             dispatch({
@@ -80,14 +107,36 @@ export const ContextProvider = ({ children }) => {
             })
         }
 
-    }, [state.country])
+    }, [])
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms))
+    }
+
+    const getHomePageData = useCallback(
+        async () => {
+            setLoading(true)
+            console.time('sleep1')
+            await getTrendingNews()
+            await sleep(1100)
+            await getMumbaiNews()
+            await sleep(1100)
+            await getDelhiNews()
+            await sleep(1100)
+            await getCovidNews().then(() => setLoading(false))
+            console.timeEnd('sleep1')
+        }, [getTrendingNews,
+        getMumbaiNews,
+        getDelhiNews,
+        getCovidNews])
 
 
 
 
     useEffect(() => {
-        getTrendingNews()
-    }, [getTrendingNews])
+        getHomePageData()
+    }, [getHomePageData])
+
 
     useEffect(() => {
         getCovidStat()
@@ -110,7 +159,6 @@ export const ContextProvider = ({ children }) => {
             dispatch,
             loading,
             setLoading,
-            changeCountry
         }}>
         {children}
     </contextValue.Provider>
