@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { useAppContext } from '../../context'
 import ArticleCard from '../../components/ArticleCard'
 import Pagination from '../../components/Pagination'
-
+import Loader from '../../components/Loader'
 function Trending() {
     const { searchNews } = useAppContext()
     const [pageNumber, setPageNumber] = useState(1)
@@ -25,25 +25,36 @@ function Trending() {
 
 
     return (
-        <>
-            <div className="grid grid-cols-4 gap-4
+        !data ?
+            <Loader />
+            :
+            <>
+                <h1 className="text-2xl font-semibold inline-block font-indigo mb-4">
+                    Trending News
+                </h1>
+
+                <div className="grid grid-cols-4 gap-4
         lg:grid-cols-3
         md:grid-cols-2
          sm:grid-cols-1
         ">
-                {
-                    data &&
-                    <>
-                        {data.map((item, i) => {
-                            return <ArticleCard data={item} />
-                        })}
-                        <Pagination pageNumber={pageNumber} pageTotal={pageTotal} />
-                    </>
+                    {
+                        data &&
+                        <>
+                            {data.map((item, i) => {
+                                return <ArticleCard data={item} />
+                            })}
+                        </>
 
+                    }
+                </div>
+
+                {data && <div className="flex w-full my-4 justify-center">
+                    <Pagination pageNumber={pageNumber} pageTotal={pageTotal} />
+                </div>
                 }
-            </div>
 
-        </>
+            </>
     )
 }
 
