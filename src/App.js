@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Switch, Redirect, useRouteMatch, useLocation } from 'react-router'
 import { useAppContext } from './context'
 //components
@@ -37,7 +37,8 @@ function App() {
   let routeMatchSports = useRouteMatch('/sports')
   let routeMatchHome = useRouteMatch('/')
 
-  const { loading } = useAppContext()
+  const { loading, getHomePageData } = useAppContext()
+
 
   return (
     <div className="App">
@@ -51,38 +52,32 @@ function App() {
           <SearchBar />
         }
 
+        <Switch>
 
-        {loading ?
-          <Loader /> :
+          {/* GENERALS */}
+          <Route exact path='/' component={Home} />
+          <Route path='/weather' component={Weather} />
+          <Route path='/about' component={About} />
 
+          {/* AUTH */}
+          <Route path='/signin' component={SignIn} />
+          <Route path='/signup' component={SignUp} />
 
-          <Switch>
-
-            {/* GENERALS */}
-            <Route exact path='/' component={Home} />
-            <Route path='/weather' component={Weather} />
-            <Route path='/about' component={About} />
-
-            {/* AUTH */}
-            <Route path='/signin' component={SignIn} />
-            <Route path='/signup' component={SignUp} />
-
-            {/* NEWS */}
-            <Route path='/news/trending' component={Trending} />
-            <Route path='/news/popular' component={Popular} />
-            <Route path='/news/covid' component={Covid} />
-            <Route path='/news/mumbai' component={Mumbai} />
-            <Route path='/news/delhi' component={Delhi} />
+          {/* NEWS */}
+          <Route path='/news/trending' component={Trending} />
+          <Route path='/news/popular' component={Popular} />
+          <Route path='/news/covid' component={Covid} />
+          <Route path='/news/mumbai' component={Mumbai} />
+          <Route path='/news/delhi' component={Delhi} />
 
 
-            {/* SPORTS */}
-            <Route path='/sports/football' component={Football} />
-            <Route path='/sports/cricket' component={Cricket} />
-            <Route path='/sports/basketball' component={Basketball} />
-            <Route path='/sports/hockey' component={Hockey} />
-          </Switch>
+          {/* SPORTS */}
+          <Route path='/sports/football' component={Football} />
+          <Route path='/sports/cricket' component={Cricket} />
+          <Route path='/sports/basketball' component={Basketball} />
+          <Route path='/sports/hockey' component={Hockey} />
+        </Switch>
 
-        }
       </div>
 
 

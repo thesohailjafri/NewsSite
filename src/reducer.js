@@ -38,16 +38,7 @@ export default function reducer(state, payload) {
                 ...state,
                 globalCovidStats: payload.globalCovidStats
             }
-        case 'SET_TOTAL_PAGES':
-            return {
-                ...state,
-                totalPages: payload.totalPages
-            }
-        case 'SET_PAGE_NUMBER':
-            return {
-                ...state,
-                pageNumber: payload.pageNumber
-            }
+
         default:
             break
     }

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 
-const fetchNews = async (search = 'india', pageNumber, pageSize) => {
+const fetchNews = async (search = 'india', pageNumber, pageSize = 20) => {
     try {
 
         var options = {

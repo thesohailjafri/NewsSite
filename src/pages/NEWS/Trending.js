@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useAppContext } from '../../context'
 import ArticleCard from '../../components/ArticleCard'
 import Pagination from '../../components/Pagination'
+
 function Trending() {
-    const { trendingNews } = useAppContext()
+    const { searchNews } = useAppContext()
+    const [pageNumber, setPageNumber] = useState(1)
+    const [pageTotal, setPageTotal] = useState(null)
+
+    const [data, setData] = useState(null)
+
+    const getData = useCallback(
+        async () => {
+            const res = await searchNews('trending india', pageNumber)
+            setPageTotal(res.total_pages)
+            setData(res.articles)
+        }, [pageNumber, searchNews])
+
+    useEffect(() => {
+        getData()
+    }, [getData])
+
+
+
 
     return (
         <>
@@ -13,13 +32,17 @@ function Trending() {
          sm:grid-cols-1
         ">
                 {
-                    trendingNews &&
-                    trendingNews.map((item, i) => {
-                        return <ArticleCard data={item} />
-                    })
+                    data &&
+                    <>
+                        {data.map((item, i) => {
+                            return <ArticleCard data={item} />
+                        })}
+                        <Pagination pageNumber={pageNumber} pageTotal={pageTotal} />
+                    </>
+
                 }
             </div>
-            <Pagination />
+
         </>
     )
 }

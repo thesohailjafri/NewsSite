@@ -1,8 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import { Link } from 'react-router-dom'
 import { useAppContext } from '../context'
-export default function Pagination() {
-    const { totalPages, pageNumber } = useAppContext()
+export default function Pagination({ pageTotal, pageNumber }) {
 
     const pages = [
         {
@@ -19,11 +18,11 @@ export default function Pagination() {
         },
         {
             isPage: true,
-            pageNo: totalPages - 1
+            pageNo: pageTotal - 1
         },
         {
             isPage: true,
-            pageNo: totalPages
+            pageNo: pageTotal
         },
 
     ]

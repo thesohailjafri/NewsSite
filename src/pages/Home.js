@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ArticleCard from '../components/ArticleCard'
 import Banner from '../components/Banner'
 import CovidStats from '../components/CovidStats'
@@ -19,8 +19,12 @@ const HeaderComp = ({ title }) => {
 }
 
 function Home() {
-    const { trendingNews, covidStats, globalCovidStats, loading, mumbaiNews, delhiNews, covidNews } = useAppContext()
+    const { trendingNews, covidStats, globalCovidStats, loading, mumbaiNews, delhiNews, covidNews, getHomePageData } = useAppContext()
 
+
+    useEffect(() => {
+        getHomePageData()
+    }, [])
 
     return (
 

@@ -25,7 +25,15 @@ export const ContextProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
+
+    const searchNews = useCallback(
+        async (q, p) => {
+            const res = await fetchNews(q, p)
+
+            return (res)
+
+        }, [])
 
 
     const getTrendingNews = useCallback(async () => {
@@ -37,15 +45,6 @@ export const ContextProvider = ({ children }) => {
                 trendingNews: res.articles
             })
 
-            // dispatch({
-            //     type: 'SET_TOTAL_PAGES',
-            //     totalPages: res.total_pages
-            // })
-
-            // dispatch({
-            //     type: 'SET_PAGE_NUMBER',
-            //     pageNumber: res.page
-            // })
 
             setTimeout(() => {
                 setLoading(false)
@@ -113,38 +112,20 @@ export const ContextProvider = ({ children }) => {
         return new Promise(resolve => setTimeout(resolve, ms))
     }
 
-    const getHomePageData = useCallback(
-        async () => {
-            setLoading(true)
-            console.time('sleep1')
-            await getTrendingNews()
-            await sleep(1100)
-            await getMumbaiNews()
-            await sleep(1100)
-            await getDelhiNews()
-            await sleep(1100)
-            await getCovidNews().then(() => setLoading(false))
-            console.timeEnd('sleep1')
-        }, [getTrendingNews,
-        getMumbaiNews,
-        getDelhiNews,
-        getCovidNews])
-
-
-
-
-    useEffect(() => {
-        getHomePageData()
-    }, [getHomePageData])
-
-
-    useEffect(() => {
-        getCovidStat()
-    }, [getCovidStat])
-
-    useEffect(() => {
-        getGlobalCovidStat()
-    }, [getGlobalCovidStat])
+    const getHomePageData = async () => {
+        setLoading(true)
+        console.time('sleep1')
+        await getCovidStat()
+        await getGlobalCovidStat()
+        await getTrendingNews()
+        await sleep(1100)
+        await getMumbaiNews()
+        await sleep(1100)
+        await getDelhiNews()
+        await sleep(1100)
+        await getCovidNews().then(() => setLoading(false))
+        console.timeEnd('sleep1')
+    }
 
 
     useEffect(() => {
@@ -159,6 +140,8 @@ export const ContextProvider = ({ children }) => {
             dispatch,
             loading,
             setLoading,
+            searchNews,
+            getHomePageData
         }}>
         {children}
     </contextValue.Provider>
