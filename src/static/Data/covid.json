@@ -1,0 +1,49 @@
+{
+    "continent": "Asia",
+    "country": "India",
+    "population": 1378937377,
+    "cases": {
+        "new": "+9614",
+        "active": 106646,
+        "critical": 8944,
+        "recovered": 104071,
+        "1M_pop": "157",
+        "total": 216805
+    },
+    "deaths": {
+        "new": "+259",
+        "1M_pop": "4",
+        "total": 6088
+    },
+    "tests": {
+        "1M_pop": "2976",
+        "total": 4103233
+    },
+    "day": "2020-06-03",
+    "time": "2020-06-03T21:45:06+00:00"
+}
+
+{
+    "continent": "All",
+    "country": "All",
+    "population": null,
+    "cases": {
+        "new": "+119924",
+        "active": 3016434,
+        "critical": 54178,
+        "recovered": 3158041,
+        "1M_pop": "842",
+        "total": 6561206
+    },
+    "deaths": {
+        "new": "+4872",
+        "1M_pop": "49.6",
+        "total": 386731
+    },
+    "tests": {
+        "1M_pop": null,
+        "total": null
+    },
+    "day": "2020-06-03",
+    "time": "2020-06-03T23:45:06+00:00"
+}
