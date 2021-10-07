@@ -12,7 +12,7 @@ import {
     LibraryIcon,
     XIcon,
 } from '@heroicons/react/outline'
-import { GiCricketBat, GiHockey, } from 'react-icons/gi'
+import { GiCricketBat, GiHockey, GiIndianPalace } from 'react-icons/gi'
 import { RiBuildingLine } from 'react-icons/ri'
 import { IoFootball, IoBasketball } from 'react-icons/io5'
 import { ChevronDownIcon } from '@heroicons/react/solid'
@@ -25,17 +25,17 @@ const news = [
         href: '#/news/trending',
         icon: TrendingUpIcon,
     },
-    // {
-    //     name: 'Popular News',
-    //     description: "Read Whats stocks are rising?, Whats'going on in sport industry?",
-    //     href: '#/news/popular',
-    //     icon: StarIcon,
-    // },
     {
-        name: 'Covid Updates',
-        description: 'Updates on Covid Situation in India.',
+        name: 'Global Covid Updates',
+        description: "Updates on Covid Situation in Asia, Europe and Other Continents.",
         href: '#/news/covid',
         icon: GlobeIcon,
+    },
+    {
+        name: 'India Covid Updates',
+        description: 'Updates on Covid Situation in India.',
+        href: '#/news/covid-india',
+        icon: GiIndianPalace,
     },
     {
         name: 'Mumbai News',

@@ -9,18 +9,12 @@ import SearchBar from './components/SearchBar'
 import Home from './PAGES/Home'
 import Weather from './PAGES/Weather'
 import About from './PAGES/About'
-
+import TempNews from './PAGES/TempNews'
 //auth pages
 import SignUp from './PAGES/AUTH/SignUp'
 import SignIn from './PAGES/AUTH/SignIn'
 
-//news pages
-import Trending from './PAGES/NEWS/Trending'
-import Recommendation from './PAGES/NEWS/Recommendation'
-import Popular from './PAGES/NEWS/Popular'
-import Mumbai from './PAGES/NEWS/Mumbai'
-import Delhi from './PAGES/NEWS/Delhi'
-import Covid from './PAGES/NEWS/Covid'
+
 
 //sport pages
 import Basketball from './PAGES/SPORTS/Basketball'
@@ -64,11 +58,11 @@ function App() {
           <Route path='/signup' component={SignUp} />
 
           {/* NEWS */}
-          <Route path='/news/trending' component={Trending} />
-          <Route path='/news/popular' component={Popular} />
-          <Route path='/news/covid' component={Covid} />
-          <Route path='/news/mumbai' component={Mumbai} />
-          <Route path='/news/delhi' component={Delhi} />
+          <Route path='/news/trending' component={() => (<TempNews term='trending india' name='Trending' />)} />
+          <Route path='/news/covid' component={() => (<TempNews term='covid' name='Covid' />)} />
+          <Route path='/news/covid-india' component={() => (<TempNews term='covid india' name='Covid India' />)} />
+          <Route path='/news/mumbai' component={() => (<TempNews term='mumbai' name='Mumbai' />)} />
+          <Route path='/news/delhi' component={() => (<TempNews term='delhi' name='Delhi' />)} />
 
 
           {/* SPORTS */}

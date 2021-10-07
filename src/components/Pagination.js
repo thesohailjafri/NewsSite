@@ -1,73 +1,35 @@
+import React, { useEffect, useState } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import { Link } from 'react-router-dom'
 import { useAppContext } from '../context'
 export default function Pagination({ pageTotal, pageNumber, setPageNumber }) {
 
-    const pages = [
-        {
-            isPage: true,
-            pageNo: pageNumber
-        },
-        {
-            isPage: true,
-            pageNo: pageNumber + 1
-        },
-        {
-            isPage: false,
-            pageNo: '...'
-        },
-        {
-            isPage: true,
-            pageNo: pageTotal - 1
-        },
-        {
-            isPage: true,
-            pageNo: pageTotal
-        },
 
-    ]
 
     return (
         <div className=" px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
 
             <div className=" mx-auto flex items-center sm:justify-between">
+                <button
+                    disabled={pageNumber === 1}
+                    onClick={() => setPageNumber(pageNumber - 1)}
+                    className={pageNumber === 1 ?
+                        "cursor-not-allowed relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-600 hover:bg-red-50"
+                        :
+                        "relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-indigo-600 hover:bg-gray-50"}>
+                    <ChevronLeftIcon className="h-5 w-5 inline" aria-hidden="true" />Prev
+                </button>
 
-                <Link
-                    href="#"
-                    className=" relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-indigo-600 hover:bg-gray-50"
-                >
-                    <span className="sr-only">Next</span>
-                    <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-                </Link>
-                {
-                    pages.map((val, i) => {
-                        return (
 
-                            <p
-                                // href="#"
-                                onClick={() => console.log(val.pageNo)}
-                                className={`${val.isPage ?
-                                    "bg-white border-gray-300 text-gray-500 hover:bg-indigo-50 relative inline-flex items-center px-4 py-2 border text-sm font-semibold hover:text-indigo-600"
-                                    :
-                                    "relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700"}
-                                    `}
-                            >
-                                <Link to=''>
-                                    {val.pageNo}
-                                </Link>
-                            </p>
-
-                        )
-                    })
-                }
-
-                <Link
-                    href="#"
-                    className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-indigo-600 hover:bg-gray-50"
-                >
-                    <span className="sr-only">Next</span>
-                    <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-                </Link>
+                <button
+                    disabled={pageNumber + 1 === pageTotal}
+                    onClick={() => setPageNumber(pageNumber + 1)}
+                    className={pageNumber + 1 === pageTotal ?
+                        "cursor-not-allowed relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-600 hover:bg-red-50"
+                        :
+                        "relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-indigo-600 hover:bg-gray-50"}>
+                    <ChevronRightIcon className="h-5 w-5 inline" aria-hidden="true" />Next
+                </button>
 
             </div>
         </div >
