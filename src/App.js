@@ -16,12 +16,7 @@ import SignIn from './PAGES/AUTH/SignIn'
 
 
 
-//sport pages
-import Basketball from './PAGES/SPORTS/Basketball'
-import Cricket from './PAGES/SPORTS/Cricket'
-import Football from './PAGES/SPORTS/Football'
-import Hockey from './PAGES/SPORTS/Hockey'
-import Loader from './components/Loader'
+
 
 
 function App() {
@@ -66,10 +61,13 @@ function App() {
 
 
           {/* SPORTS */}
-          <Route path='/sports/football' component={Football} />
-          <Route path='/sports/cricket' component={Cricket} />
-          <Route path='/sports/basketball' component={Basketball} />
-          <Route path='/sports/hockey' component={Hockey} />
+
+
+          <Route path='/sports' component={() => (<TempNews term='sports india' name='Sports' />)} />
+          <Route path='/sports/football' component={() => (<TempNews term='football india' name='Football' />)} />
+          <Route path='/sports/cricket' component={() => (<TempNews term='cricket india' name='Cricket' />)} />
+          <Route path='/sports/basketball' component={() => (<TempNews term='basketball' name='Basketball' />)} />
+          <Route path='/sports/hockey' component={() => (<TempNews term='hockey india' name='Hockey' />)} />
         </Switch>
 
       </div>
