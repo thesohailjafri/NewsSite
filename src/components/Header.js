@@ -211,7 +211,7 @@ export default function Header() {
                                                         </a>
                                                     ))}
                                                 </div>
-                                                {sportHighlights.length > 0 && <div className="px-5 py-5 bg-gray-50 dark:bg-gray-800 sm:px-8 sm:py-8">
+                                                {sportHighlights.length > 0 && <div className="px-5 py-5 bg-gray-50 dark:bg-gray-700 sm:px-8 sm:py-8">
                                                     <div>
                                                         <h3 className="text-sm tracking-wide font-medium text-gray-500 dark:text-gray-50 uppercase">Recent articles </h3>
                                                         <ul role="list" className="mt-4 space-y-4">
