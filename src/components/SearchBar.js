@@ -24,7 +24,7 @@ function SearchBar() {
         <form id='searchForm' className="flex my-4">
             <input
                 ref={ref}
-                className="py-3 px-4 text-md rounded mr-2 flex-grow"
+                className="py-3 px-4 text-md rounded mr-4 flex-grow"
                 type="text"
                 placeholder="Search News"
                 id="searchbar"
