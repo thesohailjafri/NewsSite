@@ -397,7 +397,7 @@ export default function Header() {
                             </div>
 
                         </div>
-                        <div className="py-4 px-5 space-y-6">
+                        {/* <div className="py-4 px-5 space-y-6">
 
                             <div>
 
@@ -418,7 +418,7 @@ export default function Header() {
                             </div>
 
 
-                        </div>
+                        </div> */}
                     </div>
                 </Popover.Panel>
             </Transition>
