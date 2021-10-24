@@ -19,7 +19,9 @@ export const ContextProvider = ({ children }) => {
         globalCovidStats: null,
         totalPages: 0,
         pageSize: 20,
-        pageNumber: 1
+        pageNumber: 1,
+        isSearch: false,
+        sportHighlights: [],
     }
     const homeNewsSize = 8
 
@@ -27,13 +29,38 @@ export const ContextProvider = ({ children }) => {
 
     const [loading, setLoading] = useState(false)
 
-    const searchNews = useCallback(
-        async (q, p) => {
-            const res = await fetchNews(q, p)
+    const setSearchFalse = () => {
+        dispatch({
+            type: 'SET_SEARCH_FALSE',
+        })
+    }
 
-            return (res)
+    const searchFromSearchBar = useCallback(
+        async (q) => {
+            const newHash = `#/search/${q}`
+            window.location.hash = newHash
+            dispatch({
+                type: 'SET_SEARCH',
+            })
 
         }, [])
+
+    const searchNews = useCallback(
+        async (q, p) => {
+            console.log('hoho', { q, p })
+            const res = await fetchNews(q, p)
+            return (res)
+        }, [])
+
+    const getSportNews = useCallback(async () => {
+        const res = await fetchNews('india sport', 1, 3)
+        if (res) {
+            dispatch({
+                type: 'SET_SPORTS_HIGHLIGHTS_NEWS',
+                sportHighlights: res.articles
+            })
+        }
+    }, [])
 
 
     const getTrendingNews = useCallback(async () => {
@@ -96,7 +123,6 @@ export const ContextProvider = ({ children }) => {
 
     const getCovidStat = useCallback(async () => {
 
-
         const res = await fetchCovidStats('india')
 
         if (res) {
@@ -123,6 +149,8 @@ export const ContextProvider = ({ children }) => {
         await sleep(1100)
         await getDelhiNews()
         await sleep(1100)
+        await getSportNews()
+        await sleep(1100)
         await getCovidNews().then(() => setLoading(false))
         console.timeEnd('sleep1')
     }
@@ -141,7 +169,9 @@ export const ContextProvider = ({ children }) => {
             loading,
             setLoading,
             searchNews,
-            getHomePageData
+            getHomePageData,
+            searchFromSearchBar,
+            setSearchFalse
         }}>
         {children}
     </contextValue.Provider>

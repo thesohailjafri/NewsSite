@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import ArticleCard from '../components/ArticleCard'
 import Banner from '../components/Banner'
 import CovidStats from '../components/CovidStats'
@@ -7,14 +8,17 @@ import MainWeatherCard from '../components/MainWeatherCard'
 import { FaNewspaper } from 'react-icons/fa'
 import { useAppContext } from '../context'
 
-const HeaderComp = ({ title }) => {
+const HeaderComp = ({ title, seeAllUrl }) => {
     return <div className="flex justify-between items-center my-4">
-        <h1 className="text-2xl font-semibold inline-block font-indigo">
+        <h1 className="text-2xl font-semibold inline-block dark:text-gray-50">
             {title}
         </h1>
-        <span className="text-md px-4 py-2  rounded-sm  capitalize font-semibold cursor-pointer bg-indigo-700 text-white hover:bg-indigo-800">
-            <FaNewspaper className="inline-block mr-2" />See All
-        </span>
+        {seeAllUrl && <Link to={seeAllUrl}>
+            <span className="text-md px-4 py-2  rounded-sm  capitalize font-semibold cursor-pointer bg-indigo-700 dark:bg-indigo-300 text-white dark:text-gray-900 hover:bg-indigo-800">
+                <FaNewspaper size={20} className="inline-block mr-2" />See All
+            </span>
+        </Link>}
+
     </div>
 }
 
@@ -38,7 +42,7 @@ function Home() {
 
 
 
-                <HeaderComp title="Trending News" />
+                <HeaderComp title="Trending News" seeAllUrl='/news/trending' />
                 <div className="grid grid-cols-4 gap-4
                 lg:grid-cols-3
                 md:grid-cols-2
@@ -51,15 +55,7 @@ function Home() {
                     }
                 </div>
 
-
-                <div className="flex justify-between items-center my-4">
-                    <h1 className="text-2xl font-semibold inline-block font-indigo">
-                        Covid Stats
-                    </h1>
-                    <span className="text-md px-4 py-2  rounded-sm  capitalize font-semibold cursor-pointer bg-indigo-700 text-white hover:bg-indigo-800">
-                        <FaNewspaper className="inline-block mr-2" />See All
-                    </span>
-                </div>
+                <HeaderComp title="Covid Stats" />
 
                 <div className="grid grid-cols-2 gap-4 sm:grid-cols-1">
                     {
@@ -71,7 +67,7 @@ function Home() {
                 </div>
 
 
-                <HeaderComp title="Covid News" />
+                <HeaderComp title="Covid News" seeAllUrl='/news/covid' />
                 <div className="grid grid-cols-4 gap-4
                 lg:grid-cols-3
                 md:grid-cols-2
@@ -85,7 +81,7 @@ function Home() {
                 </div>
 
 
-                <HeaderComp title="Mumbai News" />
+                <HeaderComp title="Mumbai News" seeAllUrl='/news/mumbai' />
                 <div className="grid grid-cols-4 gap-4
                 lg:grid-cols-3
                 md:grid-cols-2
@@ -99,7 +95,7 @@ function Home() {
                 </div>
 
 
-                <HeaderComp title="Delhi News" />
+                <HeaderComp title="Delhi News" seeAllUrl='/news/delhi' />
                 <div className="grid grid-cols-4 gap-4
                 lg:grid-cols-3
                 md:grid-cols-2

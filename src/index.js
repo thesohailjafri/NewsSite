@@ -19,7 +19,8 @@ ReactDOM.render(
         <App />
       </ContextProvider>
     </HashRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
+  ,
   document.getElementById('root')
 )
 

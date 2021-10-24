@@ -13,6 +13,7 @@ import TempNews from './PAGES/TempNews'
 //auth pages
 import SignUp from './PAGES/AUTH/SignUp'
 import SignIn from './PAGES/AUTH/SignIn'
+import SearchNews from './PAGES/SearchNews'
 
 
 
@@ -24,20 +25,21 @@ function App() {
   let route = useLocation()
   let routeMatchNews = useRouteMatch('/news')
   let routeMatchSports = useRouteMatch('/sports')
+  let routeMatchSearch = useRouteMatch('/search')
+
   let routeMatchHome = useRouteMatch('/')
 
-  const { loading, getHomePageData } = useAppContext()
 
 
   return (
-    <div className="App">
+    <div className="App ">
 
       {/* COMPONENTS */}
       <Header />
       <div className="max-w-7xl mx-auto px-4 sm:px-4">
 
         {
-          (routeMatchNews || routeMatchSports || routeMatchHome.isExact) &&
+          (routeMatchNews || routeMatchSports || routeMatchSearch || routeMatchHome.isExact) &&
           <SearchBar />
         }
 
@@ -63,11 +65,15 @@ function App() {
           {/* SPORTS */}
 
 
-          <Route path='/sports' component={() => (<TempNews term='sports india' name='Sports' />)} />
-          <Route path='/sports/football' component={() => (<TempNews term='football india' name='Football' />)} />
-          <Route path='/sports/cricket' component={() => (<TempNews term='cricket india' name='Cricket' />)} />
-          <Route path='/sports/basketball' component={() => (<TempNews term='basketball' name='Basketball' />)} />
-          <Route path='/sports/hockey' component={() => (<TempNews term='hockey india' name='Hockey' />)} />
+          <Route exact path='/sports' component={() => (<TempNews term='sports india' name='Sports' />)} />
+          <Route exact path='/sports/football' component={() => (<TempNews term='football india' name='Football' />)} />
+          <Route exact path='/sports/cricket' component={() => (<TempNews term='cricket india' name='Cricket' />)} />
+          <Route exact path='/sports/basketball' component={() => (<TempNews term='basketball' name='Basketball' />)} />
+          <Route exact path='/sports/hockey' component={() => (<TempNews term='hockey india' name='Hockey' />)} />
+
+          {/* Search */}
+          <Route exact path='/search/:id' component={() => (<SearchNews />)} />
+
         </Switch>
 
       </div>

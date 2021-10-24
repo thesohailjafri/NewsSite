@@ -3,7 +3,7 @@ import { numberWithCommas } from '../functions'
 function CovidStats({ data }) {
     return (
 
-        <div className='p-4 bg-white rounded shadow cursor-pointer transform scale-100 transition ease-in hover:shadow-lg'>
+        <div className='p-4 bg-white dark:bg-gray-600 dark:text-gray-50 rounded shadow cursor-pointer transform scale-100 transition ease-in hover:shadow-lg'>
             <h6 className="text-lg font-semibold mb-2">{data.country === 'All' ? "Global" : data.country} Covid Stats</h6>
             <ul>
                 <li className="cs_confirmed">Confimed : {numberWithCommas(data?.cases?.total)}</li>
