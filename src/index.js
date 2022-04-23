@@ -3,25 +3,23 @@ import ReactDOM from 'react-dom'
 
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import { HashRouter } from 'react-router-dom'
-import { createBrowserHistory } from "history"
+import { BrowserRouter } from 'react-router-dom'
 import { ContextProvider } from './context'
 /* Import Styling*/
-import './style/index.css'
-import './style/App.css'
+import './style/index.scss'
+import './style/app.scss'
 
-const customHistory = createBrowserHistory()
+// const customHistory = createBrowserHistory()
 
 ReactDOM.render(
   <React.StrictMode>
-    <HashRouter history={customHistory}>
+    <BrowserRouter>
       <ContextProvider>
         <App />
       </ContextProvider>
-    </HashRouter>
-  </React.StrictMode>
-  ,
-  document.getElementById('root')
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById('root'),
 )
 
 // If you want to start measuring performance in your app, pass a function
