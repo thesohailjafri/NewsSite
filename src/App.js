@@ -22,8 +22,19 @@ import SignIn from './PAGES/Auth/SignIn'
 import SearchNews from './PAGES/SearchNews'
 import Upload from './PAGES/Upload'
 import Dashboard from './PAGES/Dashboard'
+import { myselfApi } from './API'
+import { useSetRecoilState } from 'recoil'
+import { userInfoState } from './atoms/userInfo'
 
 function App() {
+  const setUserInfo = useSetRecoilState(userInfoState)
+  const fetchMyself = async () => {
+    const res = await myselfApi()
+    if (res && res.status === 200) {
+      setUserInfo(res.data.user)
+    }
+  }
+  fetchMyself()
   let route = useLocation()
   let routeMatchNews = useRouteMatch('/news')
   let routeMatchSports = useRouteMatch('/sports')

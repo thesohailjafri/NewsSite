@@ -6,8 +6,11 @@ import * as yup from 'yup'
 import { userInfoState } from '../../atoms/userInfo'
 import { useSetRecoilState } from 'recoil'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
+import { useHistory } from 'react-router-dom'
 
 export default function SignUp() {
+  const history = useHistory()
+
   const setUserInfo = useSetRecoilState(userInfoState)
   const register = async (values, actions) => {
     const { username, email, password } = values
@@ -19,6 +22,7 @@ export default function SignUp() {
         toast.success(res.data.msg || 'Something went wrong')
         setUserInfo((ps) => ({ ...ps, email: email }))
         actions.resetForm()
+        history.push('/signin')
       }
     }
   }
@@ -26,14 +30,14 @@ export default function SignUp() {
   const Schema = yup.object().shape({
     username: yup
       .string()
-      .required('Please Enter a username')
+      .required('Please enter a username')
       .min(3, 'Username should be at least 3 characters long')
       .max(15, 'Username should be at most 15 characters long'),
     // TODO .test()
     email: yup.string().email().required('Please Enter your Email'),
     password: yup
       .string()
-      .required('Please Enter your password')
+      .required('Please enter your password')
       .min(8, 'Password should be at least 8 characters long')
       .max(15, 'Password should be at most 16 characters long')
       .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
@@ -96,26 +100,10 @@ export default function SignUp() {
               />
             </div>
             <ul className="list-disc ml-2">
-              <ErrorMessage
-                name="username"
-                component="li"
-                className=" lowercase first-letter:uppercase"
-              />
-              <ErrorMessage
-                name="email"
-                component="li"
-                className=" lowercase first-letter:uppercase"
-              />
-              <ErrorMessage
-                name="password"
-                component="li"
-                className=" lowercase first-letter:uppercase"
-              />
-              <ErrorMessage
-                name="passwordConfirm"
-                component="li"
-                className=" lowercase first-letter:uppercase"
-              />
+              <ErrorMessage name="username" component="li" />
+              <ErrorMessage name="email" component="li" />
+              <ErrorMessage name="password" component="li" />
+              <ErrorMessage name="passwordConfirm" component="li" />
             </ul>
             <button type="submit" className="btn " disabled={isSubmitting}>
               {isSubmitting ? (

@@ -16,6 +16,8 @@ import { RiBuildingLine, RiNewspaperFill } from 'react-icons/ri'
 import { FiSun, FiMoon } from 'react-icons/fi'
 import { IoFootball, IoBasketball } from 'react-icons/io5'
 import { ChevronDownIcon } from '@heroicons/react/solid'
+import { useRecoilValue, useResetRecoilState } from 'recoil'
+import { userInfoState } from '../atoms/userInfo'
 
 const logoUrl = logo
 const news = [
@@ -86,6 +88,14 @@ function classNames(...classes) {
 export default function Header() {
   const { sportHighlights } = useAppContext()
   const [enabled, setEnabled] = useState(false)
+  const userInfo = useRecoilValue(userInfoState)
+  const resetUserInfo = useResetRecoilState(userInfoState)
+
+  const logout = () => {
+    localStorage.clear()
+    resetUserInfo()
+    window.location.reload()
+  }
 
   return (
     <Popover className="relative bg-white shadow dark:bg-gray-700 dark:text-gray-100">
@@ -260,7 +270,7 @@ export default function Header() {
                             </div>
                             <div className="mt-5 text-sm">
                               <a
-                                href="#/sports"
+                                href="/sports"
                                 className="font-medium text-indigo-600 dark:text-indigo-300  hover:text-indigo-500 dark:hover:text-indigo-200"
                               >
                                 {' '}
@@ -277,13 +287,16 @@ export default function Header() {
               )}
             </Popover>
 
-            <Link
-              to="/about"
-              className="p-1 text-base font-medium text-gray-500 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-50"
-            >
-              About
-            </Link>
-
+            {userInfo.email ? (
+              <button onClick={logout}>Logout</button>
+            ) : (
+              <Link
+                to="/signin"
+                className="p-1 text-base font-medium text-gray-500 dark:text-gray-100 hover:text-gray-900 dark:hover:text-gray-50"
+              >
+                Sign-In
+              </Link>
+            )}
             <Switch
               checked={enabled}
               onChange={() => {
@@ -400,12 +413,16 @@ export default function Header() {
                   Home
                 </Link>
 
-                <Link
-                  to="/about"
-                  className="text-base font-medium text-gray-900 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-50"
-                >
-                  About
-                </Link>
+                {userInfo.email ? (
+                  <button onClick={logout}>Logout</button>
+                ) : (
+                  <Link
+                    to="/signin"
+                    className="text-base font-medium text-gray-900 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-50"
+                  >
+                    Sign-In
+                  </Link>
+                )}
               </div>
             </div>
             <div className="py-4 px-5 space-y-6">

@@ -5,5 +5,6 @@ export const userInfoState = atom({
   default: {
     username: '',
     email: '',
+    userId: '',
   },
 })

@@ -5,18 +5,31 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter } from 'react-router-dom'
 import { ContextProvider } from './context'
+import { ToastContainer } from 'react-toastify'
 /* Import Styling*/
 import './style/index.scss'
 import './style/app.scss'
+import 'react-toastify/dist/ReactToastify.css'
+import axios from 'axios'
+import { RecoilRoot } from 'recoil'
 
-// const customHistory = createBrowserHistory()
+axios.defaults.headers.common['Authorization'] =
+  'Bearer ' + localStorage.getItem('token')
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND_API_URL
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
+axios.defaults.headers.patch['Content-Type'] = 'application/json'
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+axios.defaults.headers.delete['Content-Type'] = 'application/json'
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ContextProvider>
-        <App />
-      </ContextProvider>
+      <RecoilRoot>
+        <ContextProvider>
+          <ToastContainer />
+          <App />
+        </ContextProvider>
+      </RecoilRoot>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
