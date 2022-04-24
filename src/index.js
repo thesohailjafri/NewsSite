@@ -8,7 +8,6 @@ import { ContextProvider } from './context'
 import { ToastContainer } from 'react-toastify'
 /* Import Styling*/
 import './style/index.scss'
-import './style/app.scss'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
 import { RecoilRoot } from 'recoil'
