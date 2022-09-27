@@ -245,7 +245,7 @@ export default function Header() {
                             </a>
                           ))}
                         </div>
-                        {sportHighlights.length > 0 && (
+                        {/* {sportHighlights.length > 0 && (
                           <div className="px-5 py-5 bg-gray-50 dark:bg-gray-700 sm:px-8 sm:py-8">
                             <div>
                               <h3 className="text-sm tracking-wide font-medium text-gray-500 dark:text-gray-50 uppercase">
@@ -279,7 +279,7 @@ export default function Header() {
                               </a>
                             </div>
                           </div>
-                        )}
+                        )} */}
                       </div>
                     </Popover.Panel>
                   </Transition>
