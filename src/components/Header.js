@@ -245,41 +245,6 @@ export default function Header() {
                             </a>
                           ))}
                         </div>
-                        {/* {sportHighlights.length > 0 && (
-                          <div className="px-5 py-5 bg-gray-50 dark:bg-gray-700 sm:px-8 sm:py-8">
-                            <div>
-                              <h3 className="text-sm tracking-wide font-medium text-gray-500 dark:text-gray-50 uppercase">
-                                Recent articles{' '}
-                              </h3>
-                              <ul role="list" className="mt-4 space-y-4">
-                                {sportHighlights.map((post) => (
-                                  <li
-                                    key={post._id}
-                                    className="text-base truncate"
-                                  >
-                                    <a
-                                      href={post.link}
-                                      target="_blank"
-                                      className="font-medium text-gray-900 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-50"
-                                    >
-                                      {post.title}
-                                    </a>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div className="mt-5 text-sm">
-                              <a
-                                href="/sports"
-                                className="font-medium text-indigo-600 dark:text-indigo-300  hover:text-indigo-500 dark:hover:text-indigo-200"
-                              >
-                                {' '}
-                                View all articles{' '}
-                                <span aria-hidden="true">&rarr;</span>
-                              </a>
-                            </div>
-                          </div>
-                        )} */}
                       </div>
                     </Popover.Panel>
                   </Transition>
