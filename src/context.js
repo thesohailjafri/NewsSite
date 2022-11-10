@@ -40,8 +40,8 @@ export const ContextProvider = ({ children }) => {
   }
 
   const searchFromSearchBar = useCallback(async (q) => {
-    const newHash = `search/${q}`
-    window.location.hash = newHash
+    const search = `./search/${q}`
+    window.location.href = search
     dispatch({
       type: 'SET_SEARCH',
     })
